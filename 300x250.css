@@ -1,0 +1,157 @@
+@font-face {
+  font-family: "BrownPro-Light";
+  src: url("BrownPro-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "BrownPro-Regular";
+  src: url("BrownPro-Regular.woff") format("woff");
+}
+
+html {
+  --color-main: #990622;
+  
+  /* Testing */
+  /*border: 1px solid #ddd;*/
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+body {
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 8px;
+  font-family: "BrownPro-Regular";
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+button {
+  font-family: "BrownPro-Regular";
+}
+
+/* Image block */
+.image-block {
+  overflow: hidden;
+  transition: all 0.3s;
+
+  background-position: center;
+  background-size: cover;
+}
+
+
+
+/* Brand block */
+.brand-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  flex: 1;
+}
+
+/* CTA block */
+.cta-block {
+    text-align: center;
+}
+
+html {
+  width: 300px;
+  height: 250px;
+}
+
+.scene-1 {
+  width: calc(300px - 16px);
+  height: calc(250px - 16px);
+
+  border: 1px solid var(--color-main);
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.images-block { grid-area: 1 / 1 / 3 / 2; }
+.brand-block { grid-area: 1 / 2 / 2 / 3; }
+.cta-block { grid-area: 2 / 2 / 3 / 3; } 
+
+/* Images */
+.images-block {
+  width: 130px;
+  flex: 1;
+  padding: 8px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2fr 1fr;
+  grid-column-gap: 4px;
+  grid-row-gap: 4px;
+}
+
+.background-image-1 { grid-area: 1 / 1 / 2 / 3; }
+.background-image-2 { grid-area: 2 / 1 / 3 / 2; }
+.background-image-3 { grid-area: 2 / 2 / 3 / 3; } 
+
+/* Brand block */
+.brand-block {
+    margin-right: 8px;
+}
+
+.brand-image-1 {
+  display: block;
+  margin-top: 52px;
+  margin-bottom: 8px;
+}
+
+.brand-image-1 img {
+  width: 100px;
+}
+
+/* Copy */
+.copy-1, .copy-2 {
+  color: var(--color-main);
+  text-transform: uppercase;
+  font-size: 12px;
+  border: none;
+  text-decoration: none;
+  white-space: pre-line;
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 1.2px;
+}
+
+.copy-1 > b, .copy-2 > b {
+  display: block;
+  padding: 4px 0;
+}
+
+/* Cta block */
+.cta-1 {
+  background-color: var(--color-main);
+  color: #fff;
+  margin: 8px;
+  padding: 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  font-weight: bold;
+  margin-top: 24px;
+  letter-spacing: 1.2px;
+}
+
+#click-area {
+  cursor: pointer;
+}

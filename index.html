@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Banners</title>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <link href="300x250.css" rel="stylesheet"/>
+    <!-- You must import Enabler.js -->
+    <script src="/879366/Enabler_01_242.js">
+    </script>
+    <script src="dynamic.content.js">
+    </script>
+<script>
+
+// First of all import Enabled.js
+if (!Enabler.isInitialized()) {
+    Enabler.addEventListener(studio.events.StudioEvent.INIT, enablerInitialized);
+} else {
+    enablerInitialized();
+}
+
+// If the enabled is initialized you can get the content
+function enablerInitialized() {
+
+    if (!Enabler.isVisible()) {
+        Enabler.addEventListener(studio.events.StudioEvent.VISIBLE, onAdVisibleEvent);
+    } else {
+        onAdVisibleEvent();
+    }
+
+    // Set profileId to load content from uploaded data
+    Enabler.setProfileId(10529921);
+    var devDynamicContent = {};
+
+    // These are default settings
+    // Triumph_HK_Prospecting_Message_11_TW - Dynamic content name
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW = [{}];
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0]._id = 0;
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].advert_id = "5e68d50277de07012f98f6da";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].reporting_label = "Message_5_Smart Fit";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].default = false;
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].active = true;
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].date_start = {};
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].date_start.RawValue = "2020-01-01";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].date_start.UtcValue = 1577865600000;
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].date_end = {};
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].date_end.RawValue = "2022-01-01";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].date_end.UtcValue = 1641024000000;
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].theme = "Message_5_Smart Fit";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].message = "Message 5";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].background_image_1 = {};
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].background_image_1.Type = "file";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].background_image_1.Url = "https://s0.2mdn.net/ads/richmedia/studio/60016669/60016669_20200227023350716_SS20_DFL_Fit_Smart_Herbalist_P_AX_D1200_1.jpg";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].background_image_2 = {};
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].background_image_2.Type = "file";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].background_image_2.Url = "https://s0.2mdn.net/ads/richmedia/studio/60016669/60016669_20200227023350717_SS20_DFL_Fit_Smart_Herbalist_P_AX_D1200_2.jpg";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].background_image_3 = {};
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].background_image_3.Type = "file";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].background_image_3.Url = "https://s0.2mdn.net/ads/richmedia/studio/60016669/60016669_20200227023350717_SS20_DFL_Fit_Smart_Herbalist_P_AX_D1200_5.jpg";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].brand_image_1 = {};
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].brand_image_1.Type = "file";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].brand_image_1.Url = "https://s0.2mdn.net/ads/richmedia/studio/60016669/60016669_20200227023551570_brand-image-1.jpg";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].copy_1 = "Adapts to fit your unique shape";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].click_url = {};
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].click_url.Url = "https://www.Triumph_HK_Wavemaker/hu-HUshop.com.tw/v2/official/SalePageCategory/269521";
+    devDynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].cta_1 = "Discover More";
+
+    // Load dynamic content
+    // @return dynamicContent[contentName][0].headline_1
+    Enabler.setDevDynamicContent(devDynamicContent);
+
+    // Replace content if its loaded (Its working when dynamic.content.js imported)
+    // YOU MUST USE dynamicContent as OUTPUT
+    replaceContent(dynamicContent.Triumph_HK_Prospecting_Message_11_TW[0]);
+
+    // Set click event to clickarea
+    document.getElementById('click-area').addEventListener('click', onAdClickEvent, false);
+
+}
+
+// Trigger click tag. DO NOT USE WITH <a tag
+function onAdClickEvent(e) {
+    console.log('Click tag triggered', dynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].click_url.Url);
+    Enabler.exitOverride('Click tag', dynamicContent.Triumph_HK_Prospecting_Message_11_TW[0].click_url.Url);
+}
+
+function onAdVisibleEvent() {
+    console.log('Dynamic content loaded successfully');
+    // On Ad visible, start ad/animation, fade in whatever.
+}
+</script>
+</head>
+<body>
+    <!-- Scene 1 -->
+    <div id="click-area">
+        <section class="scene-1" data-message="Message 8">
+            <!-- Images block -->
+            <div class="images-block">
+                <div class="image-block background-image-1 position_1" id="background_image_1" style="background-image: url('https://s0.2mdn.net/ads/richmedia/studio/60016669/60016669_20200227023350716_SS20_DFL_Fit_Smart_Herbalist_P_AX_D1200_1.jpg');">
+                </div>
+                <div class="image-block background-image-2 position_2" id="background_image_2" style="background-image: url('https://s0.2mdn.net/ads/richmedia/studio/60016669/60016669_20200227023350717_SS20_DFL_Fit_Smart_Herbalist_P_AX_D1200_2.jpg');background-position-x: 0%;background-position-y: 0%;background-size: cover">
+                </div>
+                <div class="image-block background-image-3 position_3" id="background_image_3" style="background-image: url('https://s0.2mdn.net/ads/richmedia/studio/60016669/60016669_20200227023350717_SS20_DFL_Fit_Smart_Herbalist_P_AX_D1200_5.jpg');">
+                </div>
+            </div>
+            <!-- Brand block -->
+            <div class="brand-block">
+                <div class="brand-image-1">
+                    <img id="brand_image_1" src="https://s0.2mdn.net/ads/richmedia/studio/60016669/60016669_20200227023551570_brand-image-1.jpg">
+                    </img>
+                </div>
+                <div class="copy-1" id="copy_1">
+                    Discover the innovation behind the Smart Fit Bra
+                </div>
+            </div>
+            <!-- CTA block -->
+            <div class="cta-block">
+                <button class="cta-1">
+                    <span id="cta_1">
+                        Learn More
+                    </span>
+                </button>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
