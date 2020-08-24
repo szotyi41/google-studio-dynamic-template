@@ -139,6 +139,11 @@ function replaceContent(contentFields) {
                     continue;
                 }
 
+                // Openweathermap api url
+                if (placeholder.indexOf("weather") !== -1) {
+                    callWeatherApi(element, value);
+                }
+
                 // Replace text placeholders
                 if (typeof value === 'string') {
                     console.log(placeholder, "placeholder found, set inner text to: ", value);
@@ -153,5 +158,49 @@ function replaceContent(contentFields) {
                 console.error("Error found when replace placeholder: ", placeholder, "Element: ", element, "Error Message: ", error);
             }
         }
+    }
+}
+
+function callWeatherApi(element, url = '') {
+
+    // For current URL: https://api.openweathermap.org/data/2.5/weather?q=budapest&units=metric&APPID=
+    // For daily URl: 
+    if (!url) {
+        console.error('Weather api url is not defined');
+        return;
+    }
+
+    try {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var json = JSON.parse(xhttp.responseText);
+                if (typeof json === 'object') {
+
+                    // For today
+                    if (json.main && json.main.temp) {
+                        console.log('Weather for today loaded: ', json.main);
+                        element.innerHTML = parseInt(json.main.temp);
+                        return;
+                    }
+
+                    // For the day after tomorrow
+                    if (json.daily && json.daily[2] && json.daily[2].temp && json.daily[2].temp.day) {
+                        console.log('Weather for the day after tomorrow loaded: ', json.daily[2]);
+                        element.innerHTML = parseInt(json.daily[2].temp.day);
+                        return;
+                    }
+
+                    console.error('Failed to load weather data: ', 'There are no data for today or day after tomorrow');
+                }
+
+            } else {
+                console.error('Failed to load weather data: ' + this.status);
+            }
+        };
+        xhttp.open("GET", url, true);
+        xhttp.send();
+    } catch (error) {
+        console.error('Failed to load weather data: ' + error);
     }
 }
