@@ -142,6 +142,7 @@ function replaceContent(contentFields) {
                 // Openweathermap api url
                 if (placeholder.indexOf("weather") !== -1) {
                     callWeatherApi(element, value);
+                    continue;
                 }
 
                 // Replace text placeholders
