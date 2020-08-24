@@ -122,8 +122,18 @@ function replaceContent(contentFields) {
                     continue;
                 }
 
+                // Import css file
+                if (placeholder.indexOf("css") !== -1) {
+                    var file = location.pathname.split( "/" ).pop();
+                    var link = document.createElement("link");
+                    link.href = value;
+                    link.type = "text/css";
+                    link.rel = "stylesheet";
+                    document.getElementsByTagName("head")[0].appendChild(link);
+                }
+
                 // Set css
-                if ((placeholder.indexOf("css") !== -1) || (placeholder.indexOf("style") !== -1)) {
+                if (placeholder.indexOf("style") !== -1) {
                     console.log(placeholder, "css placeholder found");
                     element.style.cssText += value;
                     continue;
