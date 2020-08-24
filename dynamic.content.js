@@ -24,7 +24,9 @@
  *      'position': Background position css text e.g background_position_1
  *      'visible': Display css e.g cta_visible (animations can overwrite it)
  *      'opacity': Opacity css e.g background_opacity, cta_opacity (animations can overwrite it)
- *      'css': Css text e.g. headline_css (animations can overwrite it)
+ *      'css': Import css file dynamically. Example from asset manager.
+ *      'style': Style in text e.g. headline_style (animations can overwrite it)
+ *      'weather': If you have openweathermap api
  *
  *      If placeholder not contains these keys, its will replace content inside the tag
  *
@@ -162,9 +164,12 @@ function replaceContent(contentFields) {
     }
 }
 
-function callWeatherApi(element, url = '') {
+/*  
+* Get weather api url
+*/
+function callWeatherApi(element, url = 'https://api.openweathermap.org/data/2.5/weather?q=budapest&units=metric&APPID=&show=main.temp') {
 
-    // For current URL: https://api.openweathermap.org/data/2.5/weather?q=budapest&units=metric&APPID=
+    // For current URL: https://api.openweathermap.org/data/2.5/weather?q=budapest&units=metric&APPID=&show=main.temp
     // For daily URl: 
     if (!url) {
         console.error('Weather api url is not defined');
@@ -172,27 +177,44 @@ function callWeatherApi(element, url = '') {
     }
 
     try {
+        var value;
+
+        // Get parameters to show
+        var urlParams = new URLSearchParams(url); 
+
+        // Get show parameters
+        var showParam = urlParams.get('show'); 
+
+        // Array of ['main', 'temp'] or ['current', '2', 'temp']
+        var showInCreative = showParam.split('.');
+
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var json = JSON.parse(xhttp.responseText);
                 if (typeof json === 'object') {
 
-                    // For today
-                    if (json.main && json.main.temp) {
-                        console.log('Weather for today loaded: ', json.main);
-                        element.innerHTML = parseInt(json.main.temp);
+                    console.log('Weather data received', json);
+
+                    // Get the value (find) main.temp
+                    value = json[showInCreative[0]];
+                    for (var i = 0; i < showInCreative.length; i++) {
+                        if (value[showInCreative[i]]) {
+                            value = value[showInCreative[i]];
+                        } else {
+                            console.error('Failed to get weather info from parameter ', showInCreative);
+                            return;
+                        }
+                    }
+
+                    // Load data
+                    if (value) {
+                        console.log('Weather for today loaded: ', value);
+                        element.innerHTML = value;
                         return;
                     }
 
-                    // For the day after tomorrow
-                    if (json.daily && json.daily[2] && json.daily[2].temp && json.daily[2].temp.day) {
-                        console.log('Weather for the day after tomorrow loaded: ', json.daily[2]);
-                        element.innerHTML = parseInt(json.daily[2].temp.day);
-                        return;
-                    }
-
-                    console.error('Failed to load weather data: ', 'There are no data for today or day after tomorrow');
+                    console.error('Failed to load weather data: ', 'There are no data for the day');
                 }
 
             } else {
