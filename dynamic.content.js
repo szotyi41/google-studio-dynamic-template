@@ -26,7 +26,7 @@
  *      'opacity': Opacity css e.g background_opacity, cta_opacity (animations can overwrite it)
  *      'css': Import css file dynamically. Example from asset manager.
  *      'style': Style in text e.g. headline_style (animations can overwrite it)
- *      'weather': If you have openweathermap api
+ *      'api': If you have openweathermap api
  *
  *      If placeholder not contains these keys, its will replace content inside the tag
  *
@@ -71,13 +71,27 @@ function replaceContent(contentFields) {
 
 				// Replace images
 				if (placeholder.indexOf("image") !== -1) {
+					var url = value.Url ? value.Url : value;
+
 					// If tag is img set src if not set background image
 					if (element.tagName.toLowerCase() === "img") {
-						console.log(placeholder, "image placeholder found, set src to: ", value.Url);
-						element.src = value.Url;
+						console.log(placeholder, "image placeholder found, set src to: ", url);
+						element.src = url;
 					} else {
-						console.log(placeholder, "image placeholder found, set background image to: ", value.Url);
-						element.style.backgroundImage = "url(\'" + value.Url + "\')";
+						console.log(placeholder, "image placeholder found, set background image to: ", url);
+						element.style.backgroundImage = "url(\'" + url + "\')";
+					}
+					continue;
+				}
+
+				// Replace videos
+				if (placeholder.indexOf("video") !== -1) {
+					var url = value.Url ? value.Url : value;
+
+					// If tag is img set src if not set background image
+					if (element.tagName.toLowerCase() === "video") {
+						console.log(placeholder, "video placeholder found, set src to: ", url);
+						element.src = url;
 					}
 					continue;
 				}
@@ -94,6 +108,8 @@ function replaceContent(contentFields) {
 					}
 
 					// Else its a click_url set onAdClick event
+					console.log(placeholder, "is a click url, set onclick event and Exit url to: ", url);
+
 					element.onclick = function(event) {
 					  onAdClickEvent(event, url);
 					}
@@ -179,13 +195,15 @@ function onAdClickEvent(e, url) {
 
 /*  
 * Call api url
+*
+* If your data not in body, 
 */
 function callAPI(element, url = 'https://api.openweathermap.org/data/2.5/weather?q=budapest&units=metric&APPID=&show=main.temp') {
 
 	// For current URL: https://api.openweathermap.org/data/2.5/weather?q=budapest&units=metric&APPID=&show=main.temp
 	// For daily URl: 
 	if (!url) {
-		console.error('Weather api url is not defined');
+		console.error('Api url is not defined');
 		return;
 	}
 
@@ -196,7 +214,7 @@ function callAPI(element, url = 'https://api.openweathermap.org/data/2.5/weather
 		var urlParams = new URLSearchParams(url); 
 
 		// Get show parameters
-		var showParam = urlParams.get('show'); 
+		var showParam = urlParams.get('show') : ''; 
 
 		// Array of ['main', 'temp'] or ['current', '2', 'temp']
 		var showInCreative = showParam.split('.');
