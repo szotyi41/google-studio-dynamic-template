@@ -51,10 +51,12 @@ function replaceContent(contentFields) {
 		placeholder = placeholders[i];
 		value = contentFields[placeholder];
 		selector = [
-			"#" + placeholder,
-			"." + placeholder,
-			"#" + placeholder.replace(/_/g, '-'), 
-			"." + placeholder.replace(/_/g, '-')
+			"#" + placeholder, // Find for #background_image_1
+			"." + placeholder, // Find for .background_image_1
+			"#" + placeholder.replace(/_/g, '-'), // Find for #background-image-1
+			"." + placeholder.replace(/_/g, '-'), // Find for .background-image-1
+			"[data-placeholder='" + placeholder + "']", // Find for [data-placeholder='background_image-1']
+			"[data-placeholder='" + placeholder.replace(/_/g, '-') + "']", // Find for [data-placeholder='background-image-1']
 		].join(', ');
 
 		elements = document.querySelectorAll(selector);
@@ -111,8 +113,9 @@ function replaceContent(contentFields) {
 					console.log(placeholder, "is a click url, set onclick event and Exit url to: ", url);
 
 					element.onclick = function(event) {
-					  onAdClickEvent(event, url);
+						onAdClickEvent(event, url);
 					}
+					continue;
 				}
 
 				// Replace colors
