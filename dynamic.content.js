@@ -214,7 +214,7 @@ function callAPI(element, url = 'https://api.openweathermap.org/data/2.5/weather
 		var urlParams = new URLSearchParams(url); 
 
 		// Get show parameters
-		var showParam = urlParams.get('show') : ''; 
+		var showParam = urlParams.get('show') || ''; 
 
 		// Array of ['main', 'temp'] or ['current', '2', 'temp']
 		var showInCreative = showParam.split('.');
