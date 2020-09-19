@@ -38,6 +38,8 @@
 // contentFields: Object of placeholders e.g. {headline_1: 'Buy now', background_image_1: '', ...}
 function replaceContent(contentFields) {
 	
+	var url = "";
+	var click_url = "";
 	var elements = [];
 	var value = "";
 	var placeholder = "";
@@ -73,7 +75,7 @@ function replaceContent(contentFields) {
 
 				// Replace images
 				if (placeholder.indexOf("image") !== -1) {
-					var url = value.Url ? value.Url : value;
+					url = value.Url ? value.Url : value;
 
 					// If tag is img set src if not set background image
 					if (element.tagName.toLowerCase() === "img") {
@@ -88,7 +90,7 @@ function replaceContent(contentFields) {
 
 				// Replace videos
 				if (placeholder.indexOf("video") !== -1) {
-					var url = value.Url ? value.Url : value;
+					url = value.Url ? value.Url : value;
 
 					// If tag is img set src if not set background image
 					if (element.tagName.toLowerCase() === "video") {
@@ -100,7 +102,7 @@ function replaceContent(contentFields) {
 
 				// Replace urls
 				if (placeholder.indexOf("url") !== -1) {
-					var url = value.Url ? value.Url : value;
+					url = value.Url ? value.Url : value;
 
 					// If tag nam is <a> set href
 					if (element.tagName.toLowerCase() === "a") {
@@ -112,8 +114,11 @@ function replaceContent(contentFields) {
 					// Else its a click_url set onAdClick event
 					console.log(placeholder, "is a click url, set onclick event and Exit url to: ", url);
 
+					// Set click url
+					click_url = url;
+
 					element.onclick = function(event) {
-						onAdClickEvent(event, url);
+						onAdClickEvent(event, click_url);
 					}
 					continue;
 				}
