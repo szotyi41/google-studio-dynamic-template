@@ -101,7 +101,6 @@ function replaceContent(contentFields) {
 
 				// Replace images
 				if (placeholder.indexOf("image") !== -1) {
-					
 
 					// If tag is img set src if not set background image
 					if (element.tagName.toLowerCase() === "img") {
@@ -117,6 +116,8 @@ function replaceContent(contentFields) {
 				// Replace videos
 				if (placeholder.indexOf("video") !== -1) {
 
+					url = value.Url ? value.Url : value;
+
 					// If tag is img set src if not set background image
 					if (element.tagName.toLowerCase() === "video") {
 						console.log(placeholder, "video placeholder found, set src to: ", url);
@@ -127,6 +128,8 @@ function replaceContent(contentFields) {
 
 				// Replace urls
 				if (placeholder.indexOf("url") !== -1) {
+
+					url = value.Url ? value.Url : value;
 
 					// If tag nam is <a> set href
 					if (element.tagName.toLowerCase() === "a") {
@@ -144,6 +147,7 @@ function replaceContent(contentFields) {
 					element.onclick = function(event) {
 						onAdClickEvent(event, window.click_url);
 					}
+
 					continue;
 				}
 
