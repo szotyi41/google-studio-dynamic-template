@@ -236,7 +236,7 @@ function onAdClickEvent(e, url) {
 *
 * If your data not in body, 
 */
-function callAPI(element, url = 'https://api.openweathermap.org/data/2.5/weather?q=budapest&units=metric&APPID=&show=main.temp') {
+function callAPI(element, url) {
 
 	// For current URL: https://api.openweathermap.org/data/2.5/weather?q=budapest&units=metric&APPID=&show=main.temp
 	// For daily URl: 

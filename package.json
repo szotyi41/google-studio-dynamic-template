@@ -1,0 +1,26 @@
+{
+  "name": "google-studio-dynamic-template",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dynamic.content.js",
+  "dependencies": {
+    "@babel/preset-env": "^7.12.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3"
+  },
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szotyi41/google-studio-dynamic-template.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szotyi41/google-studio-dynamic-template/issues"
+  },
+  "homepage": "https://github.com/szotyi41/google-studio-dynamic-template#readme"
+}
